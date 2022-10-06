@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
+resources:
+- tanzu-mysql-operator-package-install.yaml
+- tanzu-mysql-operator-sa.yaml
+- spring-music-mysql.yaml
+secretGenerator:
+- name: tanzu-mysql-operator-packages-values
+  namespace: tanzu-mysql-for-kubernetes-system
+  files:
+  - override-operator-values.yaml
+  type: Opaque
+  options:
+    annotations:
+      tkg.tanzu.vmware.com/tanzu-package: tanzu-mysql-operator-packages

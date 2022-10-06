@@ -1,0 +1,27 @@
+---
+apiVersion: with.sql.tanzu.vmware.com/v1
+kind: MySQLBackupLocation
+metadata:
+  name: backuplocation-sample
+spec:
+  storage:
+    s3:
+      bucket: "name-of-bucket"
+      # bucketPath: "my-backups-prefix/"
+      # region: "us-west-1"
+      # endpoint: "custom-endpoint"
+      # caBundle: |
+      #   -----BEGIN CERTIFICATE-----
+      #   PEM-encoded certificate for verifying TLS against endpoint
+      #   -----END CERTIFICATE-----
+      secret:
+        name: backuplocation-creds-sample
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backuplocation-creds-sample
+stringData:
+  # Credentials
+  accessKeyId: "my-access-key-id"
+  secretAccessKey: "my-secret-access-key"

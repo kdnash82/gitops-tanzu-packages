@@ -1,0 +1,13 @@
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Deployment", "metadata": {"name": "server", "namespace": "tap-gui"}}),expects="1+"
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by=overlay.all,expects="1+"
+        #@overlay/match-child-defaults missing_ok=True
+        - env:
+          - name: NODE_TLS_REJECT_UNAUTHORIZED
+            value: "0"

@@ -1,0 +1,35 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
+resources:
+- tap-package-install.yaml
+- tap-sa.yaml
+# - git-secret.sops.yaml
+- git-sa.yaml 
+secretGenerator:
+- name: tap-packages-values
+  namespace: tap-install
+  files:
+  - tap-values.sops.yaml
+  type: Opaque
+  options:
+    annotations:
+      tkg.tanzu.vmware.com/tanzu-package: tap-packages
+- name: deactivate-tls
+  namespace: tap-install
+  files:
+  - deactivate-tls.yaml
+  type: Opaque
+  options:
+    annotations:
+      tkg.tanzu.vmware.com/tanzu-package: tap-packages
+# - name: node-extra-ca-certs
+#   namespace: tap-gui
+#   files:
+#   - node-extra-ca-certs.yaml
+#   type: Opaque
+#   options:
+#     annotations:
+#       tkg.tanzu.vmware.com/tanzu-package: tap-packages

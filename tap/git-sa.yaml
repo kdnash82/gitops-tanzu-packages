@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tap-default
+  namespace: tap-install
+secrets:
+  - name: registry-credentials
+  - name: tap-registry
+  - name: github-secret
+imagePullSecrets:
+  - name: registry-credentials
+  - name: tap-registry

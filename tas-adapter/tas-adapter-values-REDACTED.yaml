@@ -1,0 +1,24 @@
+---
+# tas_adapter: you get some key value pair package failure...
+  ceip_policy_disclosed: true # Installation fails if this is not set to true. Not a string.
+  api_ingress:
+    fqdn: "tas-adapter.<FQDN>"
+    tls:
+      secret_name: tas-adapter.<FQDN>-tls
+      namespace: tas-adapter-install
+  app_ingress:
+    default_domain: "apps.<FQDN>"
+    tls:
+      secret_name: apps.<FQDN>-tls
+      namespace: tas-adapter-install
+  app_registry:
+    credentials:
+      username: ""
+      password: ""
+    hostname: ""
+    path:
+      droplets: "/tas-adapter/adapter-droplet"
+      packages: "/tas-adapter/adapter-packages"
+    # ca_cert:
+    #   data: |
+    #     PEM-ENCODED-CERTIFICATE-CONTENTS

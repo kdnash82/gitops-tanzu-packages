@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    tkg.tanzu.vmware.com/tanzu-package: tanzu-mysql-operator-packages
+  name: tanzu-mysql-operator-packages-sa
+  namespace: tanzu-mysql-for-kubernetes-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    tkg.tanzu.vmware.com/tanzu-package: tanzu-mysql-operator-packages
+  name: tanzu-mysql-operator-packages-cluster-role
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    tkg.tanzu.vmware.com/tanzu-package: tanzu-mysql-operator-packages
+  name: tanzu-mysql-operator-packages-cluster-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tanzu-mysql-operator-packages-cluster-role
+subjects:
+- kind: ServiceAccount
+  name: tanzu-mysql-operator-packages-sa
+  namespace: tanzu-mysql-for-kubernetes-system

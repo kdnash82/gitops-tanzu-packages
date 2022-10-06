@@ -1,0 +1,13 @@
+---
+apiVersion: with.sql.tanzu.vmware.com/v1
+kind: MySQLRestore
+metadata:
+  name: restore-sample
+spec:
+  backup:
+    name: backup-sample
+  instanceTemplate:
+    metadata:
+      name: restored-mysql-sample
+    spec:
+      storageSize: 1Gi

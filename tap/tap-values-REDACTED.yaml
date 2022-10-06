@@ -1,0 +1,75 @@
+profile: full
+excluded_packages:
+# Used to exclude packages already installed.
+# Remove if there are no packages that need to be excluded
+    - fluxcd.source.controller.tanzu.vmware.com
+shared:
+    ingress_domain: <FQDN-for-TAP>
+    ca_cert_data: |-
+        -----BEGIN CERTIFICATE-----
+        MIIFtzCCBJ+gAwIBAgITQgAAAALjNTBrxjdc8QAAAAAAAjANBgkqhkiG9w0BAQsF
+        ADAWMRQwEgYDVQQDEwtKUkUgUm9vdCBDQTAeFw0xOTA2MjYwMjI5NDNaFw0yOTA2
+        .....
+        qBHd4lzRM5ppYWAT5IwvwuWC0sMJpKnTJCmiILRPQoN13FjQc8uC3PDoycYqJjgq
+        eFOGT53YaGkaaf+DdFo6/3dZ46XoGOd2GcqHgWMBlFvnwQowWU5Qjdw45Sa1Kuwn
+        fqMZmKoKySfjWHH27KWOEDus7FXSB2kMmpKo
+        -----END CERTIFICATE-----     
+package_overlays:
+    - name: tap-gui
+      secrets:
+        - name: deactivate-tls
+# Installation fails if this is not set to true. Not a string.
+ceip_policy_disclosed: true
+buildservice:
+    kp_default_repository: <INSTALL_REGISTRY_HOSTNAME>/<TBS_INSTALL_REPO>/<TBS_VERSION>
+    kp_default_repository_username: <HARBOR_SERVICE_ACCOUNT_USERNAME>
+    kp_default_repository_password: <HARBOR_SERVICE_ACCOUNT_PASSWORD>
+    exclude_dependencies: true
+# More information for supply chain
+# https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.2/tap/GUID-getting-started-about-supply-chains.html
+supply_chain: basic
+ootb_supply_chain_basic:
+    registry:
+        server: <INSTALL_REGISTRY_HOSTNAME>
+        repository: <REGISTRY_PROJECT_FOR_BASIC_SUPPLY>
+    gitops:
+        ssh_secret: github-ssh-secret
+ootb_supply_chain_testing_scanning:
+    registry:
+        server: <INSTALL_REGISTRY_HOSTNAME>
+        repository: <REGISTRY_PROJECT_FOR_TESTING_SUPPLY>
+    gitops:
+        ssh_secret: github-ssh-secret
+tap_gui:
+    service_type: ClusterIP
+    ingressEnabled: "true"
+    app_config:
+        app:
+            baseUrl: http://tap-gui.<FQDN>
+        catalog:
+            locations:
+                - type: url
+                  target: https://<GIT_REPOSITORY>/<PATH-TO>/catalog-info.yaml
+        backend:
+            baseUrl: http://tap-gui.<FQDN>
+            cors:
+                origin: http://tap-gui.<FQDN>
+metadata_store:
+    ns_for_export_app_cert: tap-install
+    app_service_type: ClusterIP
+scanning:
+    metadataStore:
+        # Disable embedded integration since it's deprecated
+        url: ""
+grype:
+    # (optional) Defaults to default namespace.
+    namespace: tap-install
+    targetImagePullSecret: ""
+contour:
+    infrastructure_provider: aws
+    envoy:
+        service:
+            type: LoadBalancer
+            annotations:
+                # This annotation is for air-gapped AWS only
+                service.beta.kubernetes.io/aws-load-balancer-internal: "true"
