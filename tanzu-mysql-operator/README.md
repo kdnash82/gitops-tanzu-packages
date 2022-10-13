@@ -5,7 +5,7 @@
 ```
 export INSTALL_REGISTRY_USERNAME=
 export INSTALL_REGISTRY_PASSWORD=
-export INSTALL_REGISTRY_HOSTNAME=
+export INSTALL_REGISTRY_HOSTNAME=harbor.<FQDN>
 export TDS_INSTALL_REPO=tap-services
 export TDS_VERSION=1.4.0
 ```
@@ -34,7 +34,7 @@ tanzu secret registry add tanzu-image-registry \
 ## Add TDS Repository
 ```
 tanzu package repository add tanzu-data-services-repository \
---url <INSTALL_REGISTRY_HOSTNAME>/tap-services/1.4.0:1.4.0 \
+--url harbor.<FQDN>/tap-services/1.4.0:1.4.0 \
 --namespace tanzu-mysql-for-kubernetes-system
 ```
 

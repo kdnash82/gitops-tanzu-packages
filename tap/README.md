@@ -13,6 +13,12 @@ export TBS_INSTALL_REPO=tbs
 export TBS_VERSION=1.6.1
 ```
 
+## Clone TAP Repo
+`git clone https://<GITLAB_URL>/<PATH-TO>/gitops-tanzu-packages.git`
+
+## SOME STEPS FOR CREATING SOPS KEY
+TO DO****
+
 ## Login Tanzu Registry
 `docker login registry.tanzu.vmware.com`
 
@@ -39,17 +45,18 @@ tanzu package repository add tanzu-tap-repository \
   --namespace tap-install
 ```
 
+## Veriy TAP Package Repo
+`kubectl get package -n tap-install`
+
+
 ## Copy TBS Images to Private Registry
 ```
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:${TBS_VERSION} \
   --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${TBS_INSTALL_REPO}/${TBS_VERSION}
 ```
 
-## Veriy TAP Package Repo
-`kubectl get package -n tap-install`
-
-## Clone TAP Repo
-`git clone https://<GITLAB_URL>/<PATH-TO>/gitops-tanzu-packages.git`
+## Veriy TBS Package Repo
+`kubectl get package -n tbs-install` # THIS IS NOT THE COMMAND/CORRECT THIS!
 
 ## Import sops-key
 - Copy value from `tkg/sandbox/tkg-sandbox-tap/sops-key` in vault and save to file
@@ -86,7 +93,7 @@ excluded_packages:
     - cert-manager.tanzu.vmware.com
     - contour.tanzu.vmware.com
 ```
-- All packages for TBS in ${INSTALL_REGISTRY_HOSTNAME}/${TBS_INSTALL_REPO}/${TBS_VERSION} are the full dependency versions unless you copied over the light versions.  The lite versions are not part of this README.  See VMware documenation for lite versions for TBS.  The lite version requires an open internet connection to pull down dependencies as needed.
+- All packages for TBS in ${INSTALL_REGISTRY_HOSTNAME}/${TBS_INSTALL_REPO}/${TBS_VERSION} are the full dependency versions unless you copied over the light versions.  The lite versions are not part of this README.  The lite version requires an open internet connection to pull down dependencies as needed.  See VMware documenation for lite versions for TBS.  
 
 ## Encrypt tap-values.sops.yaml
 `sops -e <path-to>/tap-values.sops.yaml`

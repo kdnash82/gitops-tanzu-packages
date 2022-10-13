@@ -22,7 +22,7 @@ spec:
   renewBefore: 360h # 15d
   # The use of the common name field has been deprecated since 2000 and is
   # discouraged from being used.
-  commonName: svc.<FQDN> # Edit This Value
+  commonName: svc.internal.<FQDN> # Edit This Value
   isCA: false
   # privateKey:
   #   algorithm: RSA
@@ -33,8 +33,8 @@ spec:
   #   - client auth
   # At least one of a DNS Name, URI, or IP address is required.
   dnsNames:
-    - svc.<FQDN> # Edit This Value
-    - www.svc.<FQDN> # Edit This Value
+    - svc.internal.<FQDN> # Edit This Value
+    - www.svc.internal.<FQDN> # Edit This Value
   # uris:
   #   - spiffe://cluster.local/ns/sandbox/sa/example
   # ipAddresses:
