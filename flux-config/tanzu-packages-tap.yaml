@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tanzu-packages-tap
+  namespace: flux-system
+spec:
+  # dependsOn:
+  #   - name: tanzu-packages-tap
+  interval: 5m0s
+  path: ./tap
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: tanzu-packages
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-key
+
