@@ -4,7 +4,7 @@ kind: Kustomization
 generatorOptions:
   disableNameSuffixHash: true
 resources:
-- tas-package-install.yaml
+- tas-package-install.sops.yaml
 - tas-sa.yaml
 # - git-secret.sops.yaml 
 secretGenerator:
