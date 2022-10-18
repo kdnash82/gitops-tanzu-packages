@@ -1,19 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: cert-manager
----
-apiVersion: packaging.carvel.dev/v1alpha1
-kind: PackageRepository
-metadata:
-  annotations:
-    tanzu.vmware.com/owner: tkg
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  fetch:
-    imgpkgBundle:
-      image: projects.registry.vmware.com/tkg/packages/standard/repo:v1.5.4
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: cert-manager
 
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
@@ -24,7 +12,7 @@ metadata:
     tkg.tanzu.vmware.com/tanzu-package-ClusterRoleBinding: cert-manager-packages-cluster-rolebinding
     tkg.tanzu.vmware.com/tanzu-package-ServiceAccount: cert-manager-packages-sa
   name: cert-manager
-  namespace: cert-manager
+  namespace: tanzu-package-repo-global
 spec:
   serviceAccountName: cert-manager-packages-sa
   packageRef:

@@ -1,3 +1,10 @@
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: prometheus
+#   labels: 
+#     name: prometheus
+---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
@@ -8,7 +15,7 @@ metadata:
     tkg.tanzu.vmware.com/tanzu-package-ServiceAccount: prometheus-packages-sa
     ext.packaging.carvel.dev/ytt-paths-from-secret-name.1: alertmanager-overlay
   name: prometheus
-  namespace: packages
+  namespace: tanzu-package-repo-global
 spec:
   packageRef:
     refName: prometheus.tanzu.vmware.com

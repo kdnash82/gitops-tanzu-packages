@@ -1,3 +1,22 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tas-adapter-install 
+  labels: 
+    name: tas-adapter-install 
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  annotations:
+    tanzu.vmware.com/owner: tkg
+  name: tas-adapter-repository
+  namespace: tas-adapter-install 
+spec:
+  fetch:
+    imgpkgBundle:
+      image: registry.tanzu.vmware.com/app-service-adapter/tas-adapter-package-repo:0.9.0
+---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
