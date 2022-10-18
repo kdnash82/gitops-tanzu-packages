@@ -1,11 +1,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: apps.<FQDN> # Edit This Value
+  name: apps.kdash.vmware # Edit This Value
   namespace: tas-adapter-install
 spec:
   # Secret names are always required.
-  secretName: apps.<FQDN>-tls # Edit This Value
+  secretName: apps.kdash.vmware-tls # Edit This Value
 
   # secretTemplate is optional. If set, these annotations and labels will be
   # copied to the Secret named example-com-tls. These labels and annotations will
@@ -22,7 +22,7 @@ spec:
   renewBefore: 360h # 15d
   # The use of the common name field has been deprecated since 2000 and is
   # discouraged from being used.
-  commonName: apps.<FQDN> # Edit This Value
+  commonName: apps.kdash.vmware # Edit This Value
   isCA: false
   # privateKey:
   #   algorithm: RSA
@@ -33,8 +33,8 @@ spec:
   #   - client auth
   # At least one of a DNS Name, URI, or IP address is required.
   dnsNames:
-    - apps.<FQDN> # Edit This Value
-    - www.apps.<FQDN> # Edit This Value
+    - apps.kdash.vmware # Edit This Value
+    - www.apps.kdash.vmware # Edit This Value
   # uris:
   #   - spiffe://cluster.local/ns/sandbox/sa/example
   # ipAddresses:
