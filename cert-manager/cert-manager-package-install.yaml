@@ -1,3 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
@@ -6,7 +11,7 @@ metadata:
     tkg.tanzu.vmware.com/tanzu-package-ClusterRoleBinding: cert-manager-packages-cluster-rolebinding
     tkg.tanzu.vmware.com/tanzu-package-ServiceAccount: cert-manager-packages-sa
   name: cert-manager
-  namespace: packages
+  namespace: cert-manager
 spec:
   serviceAccountName: cert-manager-packages-sa
   packageRef:

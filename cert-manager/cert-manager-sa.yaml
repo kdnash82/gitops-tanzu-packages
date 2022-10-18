@@ -4,7 +4,7 @@ metadata:
   annotations:
     tkg.tanzu.vmware.com/tanzu-package: cert-manager-packages
   name: cert-manager-packages-sa
-  namespace: packages
+  namespace: cert-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -33,4 +33,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: cert-manager-packages-sa
-  namespace: packages
+  namespace: cert-manager
