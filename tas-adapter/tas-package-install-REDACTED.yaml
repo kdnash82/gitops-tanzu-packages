@@ -15,6 +15,16 @@ stringData:
     username: #VMWARE REGISTRY USERNAME
     password: #VMWARE REGISTRY PASSWORD
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: tanzunet-registry
+    namespace: tas-adapter-install
+type: kubernetes.io/basic-auth
+stringData:
+    username: #VMWARE REGISTRY USERNAME
+    password: #VMWARE REGISTRY PASSWORD
+---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageRepository
 metadata:
