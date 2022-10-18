@@ -4,6 +4,19 @@ metadata:
   name: cert-manager
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  annotations:
+    tanzu.vmware.com/owner: tkg
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  fetch:
+    imgpkgBundle:
+      image: projects.registry.vmware.com/tkg/packages/standard/repo:v1.5.4
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
   annotations:
