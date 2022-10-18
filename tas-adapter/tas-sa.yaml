@@ -5,6 +5,8 @@ metadata:
     tkg.tanzu.vmware.com/tanzu-package: tas-packages
   name: tas-packages-sa
   namespace: tas-adapter-install
+imagePullSecrets:
+- name: vmware-harbor-secret
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
