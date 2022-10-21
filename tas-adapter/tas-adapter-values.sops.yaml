@@ -13,9 +13,9 @@ app_ingress:
         namespace: ENC[AES256_GCM,data:zpzsffUs3UFE6c9a9HNjKA+T0g==,iv:bXBkfvsjOrXLxFJ5fz9VSIbjYSibcECj1bX7ihXmcog=,tag:GN79kB2Z81KwOmhpPceEfQ==,type:str]
 app_registry:
     credentials:
-        username: ""
-        password: ""
-    hostname: ""
+        username: ENC[AES256_GCM,data:dHtLoiRKNvE=,iv:PXmfubJ0HEGvs8UQ+hdyfzJcPX0AmE3rq76gi3RZP/k=,tag:Dda+78Ilo6T7mya2SXcKRg==,type:str]
+        password: ENC[AES256_GCM,data:dXrN/9yeDQM=,iv:m8nAMx2Kp8xCgrwT9JRVz78nobkYFM5nKS7vK3BEYRk=,tag:uUOMKiiw5HHvBssA+UdoLQ==,type:str]
+    hostname: ENC[AES256_GCM,data:wEmorGuF01m+oJzzy3WxPjATY8KAVs2TOPw=,iv:ZiQ21p3XQquB/129EIBEWOS9Tak/lthGfPGOgIz5QAA=,tag:jrGCSWmSkaO2YncvaJ3KeA==,type:str]
     path:
         droplets: ENC[AES256_GCM,data:scijB21mdI0O3u7PRw8WiWoHj4bcmH45vzbxgQ==,iv:VS8RUBfUMoP/KtkD2ki4hXeLe4RxhJI6RtlxwSocrc8=,tag:mUkuH5uDqil0Tnv7jBiclg==,type:str]
         packages: ENC[AES256_GCM,data:Jce5E41M+Xlvgz6U4h+ZPSGkaSNpWJ96AEk/al0=,iv:hZfug5vJ58HlCT5qDPgzhabv+Ac1OdWB8vcwEhXCd9k=,tag:6Q/KaOV7Zt5vVZZACDwzDQ==,type:str]
@@ -28,8 +28,8 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2022-10-21T18:39:29Z"
-    mac: ENC[AES256_GCM,data:q1cbIbjchX65FL8CTCj+3hbFUZQcDZpJ4lawr6oP4WY72Uuifa3ETzGnqPg75O7lnQuAe4UXi7P4gnowXENk+Tv0G8XvpM1E5nOF197/snonuz15tWf1oY/UkD+GwNINC4ZifUXZp5+myl/GfUJvU/ol1moAkgXASErwZuTIF/Q=,iv:scBVHHRr9dabQiNFwWBmcZ3ji4KdhuuVGmoWNI1W7Gs=,tag:ZgHV+sTbHM9xQ3X7OznHuQ==,type:str]
+    lastmodified: "2022-10-21T19:37:13Z"
+    mac: ENC[AES256_GCM,data:hEg0di+lCQfCoxM8wGvtHXCklJwUD+XUuLJPSLCjed8LZybYSIU4qG+uAZlrbsLzZ9ta30voixWerpSbm/lcJyOTx8XDz4HP6YH2NlT8Ag/Y7BXZjlusTIsiCn6jK2PC+FLY+5uBFm8VHaBmSR82Qvt0OZCgYU12cGQNMdKFfWU=,iv:vQ2eboZu/GkPCkQsyfINSjE4uEldeH5OLcXG/dvLjWE=,tag:8G/eiqty/iikGdHOIaLkDQ==,type:str]
     pgp:
         - created_at: "2022-10-21T18:39:27Z"
           enc: |
