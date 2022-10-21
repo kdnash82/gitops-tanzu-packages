@@ -6,24 +6,22 @@ metadata:
         name: tas-adapter-install
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-    name: vmware-harbor-secret
-    namespace: tas-adapter-install
-type: kubernetes.io/basic-auth
-stringData:
-    username: #VMWARE REGISTRY USERNAME
-    password: #VMWARE REGISTRY PASSWORD
----
-apiVersion: v1
+data:
+    .dockerconfigjson: myregistrysecretsbase64encodedeyJhdXRocyIoia25h0ZSMxQjA1MzA4MiEifX19
 kind: Secret
 metadata:
     name: tanzunet-registry
     namespace: tas-adapter-install
-type: kubernetes.io/basic-auth
-stringData:
-    username: #VMWARE REGISTRY USERNAME
-    password: #VMWARE REGISTRY PASSWORD
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretExport
+metadata:
+    name: tanzunet-registry
+    namespace: tas-adapter-install
+spec:
+    toNamespaces:
+        - '*'
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageRepository
@@ -37,7 +35,7 @@ spec:
         imgpkgBundle:
             image: registry.tanzu.vmware.com/app-service-adapter/tas-adapter-package-repo:0.9.0
             secretRef:
-                name: vmware-harbor-secret
+                name: tanzunet-registry
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
