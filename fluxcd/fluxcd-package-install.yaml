@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: flux-system
+    labels:
+        name: flux-system
+# ---
+# apiVersion: v1
+# data:
+#     .dockerconfigjson: eyJhdXRocyI6eyJyZWdpc3RyeS50YW56dS52bXdhcmUuY29tIjp7InVzZXJuYW1lIjoia25hc2hAdm13YXJlLmNvbSIsInBhc3N3b3JkIjoiTWFyZ3Vlcml0ZSMxQjA1MzA4MiEifX19
+# kind: Secret
+# metadata:
+#     name: tanzunet-registry
+#     namespace: tas-adapter-install
+# type: kubernetes.io/dockerconfigjson
+# ---
+# apiVersion: secretgen.carvel.dev/v1alpha1
+# kind: SecretExport
+# metadata:
+#     name: tanzunet-registry
+#     namespace: tas-adapter-install
+# spec:
+#     toNamespaces:
+#         - '*'
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+    annotations:
+        kdash.vmware.com/owner: tkg
+    name: fluxcd-repository
+    namespace: flux-system
+spec:
+    fetch:
+        imgpkgBundle:
+            image: harbor.az.dlpvmw.net/imgpkg/charts/fluxcd:latest
+            # secretRef:
+            #     name: tanzunet-registry
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    tkg.tanzu.vmware.com/tanzu-package-ClusterRole: fluxcd-packages-cluster-role
+    tkg.tanzu.vmware.com/tanzu-package-ClusterRoleBinding: fluxcd-packages-cluster-rolebinding
+    tkg.tanzu.vmware.com/tanzu-package-ServiceAccount: fluxcd-packages-sa
+  name: fluxcd
+  namespace: tanzu-package-repo-global
+spec:
+  serviceAccountName: fluxcd-packages-sa
+  packageRef:
+    refName: fluxcd.kdash.vmware
+    # versionSelection:
+    #   constraints: 1.5.3+vmware.2-tkg.1
