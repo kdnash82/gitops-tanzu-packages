@@ -2,20 +2,20 @@
 # tas_adapter: you get some key value pair package failure...
   ceip_policy_disclosed: true # Installation fails if this is not set to true. Not a string.
   api_ingress:
-    fqdn: "tas-adapter.<FQDN>"
+    fqdn: "tas-adapter.kdash.vmware"
     tls:
-      secret_name: tas-adapter.<FQDN>-tls
+      secret_name: tas-adapter.kdash.vmware-tls
       namespace: tas-adapter-install
   app_ingress:
-    default_domain: "apps.<FQDN>"
+    default_domain: "apps.kdash.vmware"
     tls:
-      secret_name: apps.<FQDN>-tls
+      secret_name: apps.kdash.vmware-tls
       namespace: tas-adapter-install
   app_registry:
     credentials:
-      username: ""
-      password: ""
-    hostname: ""
+      username: "user"
+      password: "pass"
+    hostname: "host"
     path:
       droplets: "/tas-adapter/adapter-droplet"
       packages: "/tas-adapter/adapter-packages"
