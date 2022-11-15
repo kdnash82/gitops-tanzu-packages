@@ -27,8 +27,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  finalizers:
-    - kubernetes
   annotations:
     tkg.tanzu.vmware.com/tanzu-package: contour-packages
   name: contour-packages-cluster-rolebinding
