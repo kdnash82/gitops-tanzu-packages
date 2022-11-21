@@ -4,7 +4,7 @@ metadata:
   annotations:
     tkg.tanzu.vmware.com/tanzu-package: contour-packages
   name: contour-packages-sa
-  namespace: packages
+  namespace: tanzu-package-repo-global
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -33,4 +33,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: contour-packages-sa
-  namespace: packages
+  namespace: tanzu-package-repo-global
