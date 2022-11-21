@@ -5,7 +5,7 @@ generatorOptions:
   disableNameSuffixHash: true
 resources:
 - contour-package-install.yaml
-# - contour-sa.yaml
+- contour-sa.yaml
 - contour-data-values-secret.yaml
 
 # - git-secret.sops.yaml 
