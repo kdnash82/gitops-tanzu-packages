@@ -9,14 +9,14 @@ generatorOptions:
 # - git-secret.sops.yaml
 # - git-sa.yaml 
 secretGenerator:
-- name: tap-packages-values-temp
-  namespace: tap-install
-  files:
-  - tap-values.sops.yaml
-  type: Opaque
-  options:
-    annotations:
-      tkg.tanzu.vmware.com/tanzu-package: tap-packages
+# - name: tap-packages-values-temp
+#   namespace: tap-install
+#   files:
+#   - tap-values.sops.yaml
+#   type: Opaque
+#   options:
+#     annotations:
+#       tkg.tanzu.vmware.com/tanzu-package: tap-packages
 - name: deactivate-tls
   namespace: tap-install
   files:
