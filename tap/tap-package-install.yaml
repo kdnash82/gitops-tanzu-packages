@@ -20,7 +20,7 @@ spec:
   packageRef:
     refName: tap.tanzu.vmware.com
     versionSelection:
-      constraints: 1.2.1
+      constraints: 1.5.4
   values:
   - secretRef:
       name: tap-packages-values
