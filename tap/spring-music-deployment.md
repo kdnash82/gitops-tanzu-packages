@@ -35,7 +35,7 @@ Note:  There may be a cleaner way of doing this.
 ## Apply Single User Permissions to Spring Music Namespace
 Note: You may be able to copy the value from .dockerconfigjson within the tap-registry secret for <YOUR-REGISTRY-CREDS-BASE64>. `kubectl get secret -n tap-install tap-registry -o yaml`
 ```
-cat <<EOF | kubectl -n spring-music apply -f -
+cat <<EOF | kubectl -n dotnet-ns apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
@@ -44,7 +44,7 @@ metadata:
     secretgen.carvel.dev/image-pull-secret: ""
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: eyJhdXRocyI...YTBDdXZBcktoaGptZk8zSyJ9fX0=
+  .dockerconfigjson: eyJhdXRocyI6eyJjcy1zLWhhcmJvci5hdm1jLmFybXkubWlsIjp7InVzZXJuYW1lIjoidGFwLWFkbWluIiwicGFzc3dvcmQiOiJNYWdpY0Nsb3VkMjAyMyEhQEAifX19 
 ---
 apiVersion: v1
 kind: Secret
@@ -54,7 +54,7 @@ metadata:
     secretgen.carvel.dev/image-pull-secret: ""
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: eyJhdXRocyI...YTBDdXZBcktoaGptZk8zSyJ9fX0=
+  .dockerconfigjson: eyJhdXRocyI6eyJjcy1zLWhhcmJvci5hdm1jLmFybXkubWlsIjp7InVzZXJuYW1lIjoidGFwLWFkbWluIiwicGFzc3dvcmQiOiJNYWdpY0Nsb3VkMjAyMyEhQEAifX19
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -62,6 +62,7 @@ metadata:
   name: default
 secrets:
   - name: registry-credentials
+  - name: github-ssh-secret
 imagePullSecrets:
   - name: registry-credentials
   - name: tap-registry

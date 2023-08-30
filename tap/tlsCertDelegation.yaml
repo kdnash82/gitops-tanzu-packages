@@ -1,0 +1,10 @@
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: default-delegation
+  namespace: dotnet-ns
+spec:
+  delegations:
+    - secretName: tap-gui-cert-army
+      targetNamespaces:
+        - dotnet-ns
