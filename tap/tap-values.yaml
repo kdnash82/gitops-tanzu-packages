@@ -165,6 +165,25 @@ shared:
         hxuQE0iBzcqQxw3B1Jg/jvIOV2gzEo6ZCbHw5PYQ9DbySb3qozjIVkEjg5rfoRs1
         fOs/QbP1b0s6Xq5vk3aY0vGZnUXEjnI=
         -----END CERTIFICATE-----
+        -----BEGIN CERTIFICATE-----
+        MIIDHjCCAgagAwIBAgIQc4IPtKH9b6o68uwFz7001jANBgkqhkiG9w0BAQsFADAp
+        MScwJQYDVQQDEx50YXAtaW5ncmVzcy1zZWxmc2lnbmVkLXJvb3QtY2EwHhcNMjMw
+        ODI5MTM1MzMxWhcNMjMxMTI3MTM1MzMxWjApMScwJQYDVQQDEx50YXAtaW5ncmVz
+        cy1zZWxmc2lnbmVkLXJvb3QtY2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+        AoIBAQDQffmrCbFxgeQYL4SFH9+CicTUmp/CS4sSanVv2XyAV9aHkO2Mt/r94pQ6
+        o33wpwgMPWOyEWqPU2+Ip9CAglJielOANl37ROI6+RHtnop7nWJuoIyX9ow2q1sA
+        VMOtajJa3D3PByqMp9vl3VjqrBZjMeyWZ4Djtz9vFlBy1aJf77XFXuQtDqie6rG3
+        LLjcAy+stibxcSBJiPg0njwROpopj85xlJR+HKfYltZ95K5kVLfrDD9J8rMvmQPa
+        dAnv4vIgZPF4F8tQP+Oa7CzBHbXVB5nWK1xJIppRuD/7Y7CLM+Y8JSv128tHgghV
+        L0Mry7rp2pYb4oCvz7bx2hecKFQRAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwICpDAP
+        BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTyqz+Wi+HL6g7i6To6OyNtRySx6TAN
+        BgkqhkiG9w0BAQsFAAOCAQEADd1VZQmdXeEoVJxZ3FG58Shxg+u71PUW+Dx2qibQ
+        jMrK5dPRL/l4C6APp44mDGgW6QlgYVbg8v9axDfUX0HEP6cHTANOIOfJM2Cektu9
+        mjPu+MXvsol5s05ra8mMk/y4fyh1li9NIsOaEgEU6RQmHR295gvyJ1vpR0UcIBd9
+        dJaslPC0nWLj9gXRFXthVZNELMC1jbyDutI6ZYCUDzFcmUSs9Htzy07mMxxgb0+3
+        QpuUCYJN2e+PkiBDZxJ/DrD1agToUMtOWPBa42jacRFDvN7rEQ6RJ+DAQxLw22C2
+        aCH+D4iMyKO0RZxlgJ49WaF1knw4J8anUwyd/oRHfr+aJw==
+        -----END CERTIFICATE-----
 # Installation fails if this is not set to true. Not a string.
 ceip_policy_disclosed: true
 buildservice:
@@ -185,20 +204,10 @@ ootb_supply_chain_basic:
 
 
 ootb_supply_chain_testing_scanning:
-    service_account: default
     registry:
         server: cs-s-harbor.avmc.army.mil 
         repository: tap-supply-chain-testing 
-    gitops:
-        server_address: https://gitlab.k8s.avmc.army.mil
-        repository_owner: tap-weather
-        branch: main
-        username: tap-weather
-        email: tap-user@tap.avmc.army.mil
-        commit_message:  tap-user@tap.avmc.army.mil
-        commit_strategy: direct
-        ssh_secret: github-ssh-secret
-    cluster_builder: default
+    cluster_builder: default #tried full and saw many more critical vulns.  Trying to cut over to tiny.  Tiny seems to not include all of the buildpacks?
     service_account: default
 tap_gui:
     tls:
