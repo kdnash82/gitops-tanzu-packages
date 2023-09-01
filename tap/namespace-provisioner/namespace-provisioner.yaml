@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: desired-namespaces
+    namespace: tap-namespace-provisioning
+    annotations:
+        kapp.k14s.io/create-strategy: fallback-on-update
+        namespace-provisioner.apps.tanzu.vmware.com/no-overwrite: "" #! This annotation tells the provisioner app to not override this configMap as this is your desired state.
+data:
+    namespaces.yaml: |
+        #@data/values
+        ---
+        namespaces:
+        - name: dotnet-ns
+        # additional parameters about dev-ns1 added via label/annotations or GitOps
+        # - name: test-ns
+        # # additional parameters about dev-ns1 added via label/annotations or GitOps
