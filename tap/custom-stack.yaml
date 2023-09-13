@@ -1,0 +1,25 @@
+
+---
+apiVersion: stacks.stacks-operator.tanzu.vmware.com/v1alpha1
+kind: CustomStack
+metadata:
+  name: default-with-certs
+  namespace: build-service
+spec:
+  source:
+    stack:
+      name: default
+      kind: ClusterStack
+  destination:
+    build:
+      tag: <HARBOR_URL>/build-service/default-with-certs/build
+    run:
+      tag: <HARBOR_URL>/build-service/default-with-certs/run
+    stack:
+      name: default-with-certs
+      kind: ClusterStack
+  caCerts:
+    buildRef:
+      name: dod-ca-certs
+    runRef:
+      name: dod-ca-certs

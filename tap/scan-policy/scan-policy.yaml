@@ -1,0 +1,50 @@
+apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
+kind: ScanPolicy
+metadata:
+  name: scan-policy
+  namespace: dotnet-ns
+  labels:
+    'app.kubernetes.io/part-of': 'enable-in-gui'
+spec:
+  regoFile: |
+    package main
+
+    # Accepted Values: "Critical", "High", "Medium", "Low", "Negligible", "UnknownSeverity"
+    notAllowedSeverities := ["Critical", "High", "UnknownSeverity"]
+    # not concerned about first two (GHSA) as they are denial of service.  35390 and 35391 require login to the machine to exploit.  
+    ignoredDotNet := ["GHSA-5f2m-466j-3848", "GHSA-xhfc-gr8f-ffwc", "CVE-2023-35390", "CVE-2023-35391"]
+    
+    # including false positives from Grype 0.54 - removed CVE-2016-0948 for demo
+    grypeAngularFalsePositives := ["CVE-2016-0949", "CVE-2016-4118", "CVE-2017-11291", "CVE-2017-3101", "CVE-2018-12804", "CVE-2018-12805", 
+      "CVE-2018-4923", "CVE-2018-4994", "CVE-2020-5674", "CVE-2021-21085", "CVE-2021-40719", "CVE-2017-18589", "CVE-2018-25076", "CVE-2014-9488", "CVE-2020-1416", "CVE-2018-25076" , "GHSA-2jcg-qqmg-46q6"]
+    
+    grypeGoLangFalsePositives := ["CVE-2023-32002", "CVE-2023-32004", "CVE-2023-32006", "CVE-2023-32559",  "CVE-2015-5237" ]
+    
+    ignoreCves := array.concat(ignoredDotNet, array.concat(grypeAngularFalsePositives, grypeGoLangFalsePositives))
+    contains(array, elem) = true {
+      array[_] = elem
+    } else = false { true }
+
+    isSafe(match) {
+      severities := { e | e := match.ratings.rating.severity } | { e | e := match.ratings.rating[_].severity }
+      some i
+      fails := contains(notAllowedSeverities, severities[i])
+      not fails
+    }
+
+    isSafe(match) {
+      ignore := contains(ignoreCves, match.id)
+      ignore
+    }
+
+    deny[msg] {
+      comps := { e | e := input.bom.components.component } | { e | e := input.bom.components.component[_] }
+      some i
+      comp := comps[i]
+      vulns := { e | e := comp.vulnerabilities.vulnerability } | { e | e := comp.vulnerabilities.vulnerability[_] }
+      some j
+      vuln := vulns[j]
+      ratings := { e | e := vuln.ratings.rating.severity } | { e | e := vuln.ratings.rating[_].severity }
+      not isSafe(vuln)
+      msg = sprintf("CVE %s %s %s", [comp.name, vuln.id, ratings])
+    }

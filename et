@@ -1,0 +1,149 @@
+[33mcommit 4b77c7fdb7b65154e55ba5c2e0b3fb0f7047e1f0[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: nashkd <kevin.d.nash.ctr@army.mil>
+Date:   Fri Sep 1 20:42:31 2023 +0000
+
+    we've worked to improve the scan results of workloads in TAP.  It looks like there is a bug where config writer will not respect the CAfile.  The add-git-ca.yaml currently implements a workaround to skip ssl verify.  Furutre work should be to include the cafile such that the config writer can coummunicate with the gitlab using a private CA.  Tap values also has its gitops removed for now as part of troubleshooting.  we've also tried to change the cluster_builder, but see increased CVEs with the other options
+
+[33mcommit 3adafe856dc0de9738444550b23e8b9235bf67b6[m
+Author: nashkd <kevin.d.nash.ctr@army.mil>
+Date:   Fri Sep 1 14:37:47 2023 +0000
+
+    we've updated to TBS 1.10.11, integrated OIDC auth with vIDM
+
+[33mcommit 9615da1578c043ca644434c6e89e75ad9ce1c242[m
+Author: nashkd <kevin.d.nash.ctr@army.mil>
+Date:   Wed Aug 30 20:33:08 2023 +0000
+
+    Lots of work to get a .NET accelerator running.  We figured out that we need a blank  in tap values to be able to avoid using the default clsuter issuer.  We also need to double check how flux is able to leverage custom CAs.  We have made updates to secrets to include references to those CAs as well as updates to the tap values.  It may be that only one of these are necessary, but we would need to test more to confirm.
+
+[33mcommit 5acb12df4231ca600ba5db5af2ab55a65947ff18[m
+Author: nashkd <kevin.d.nash.ctr@army.mil>
+Date:   Tue Aug 29 15:12:43 2023 +0000
+
+    initial for army
+
+[33mcommit e1782f57bb574e46bbac64994447149a38e2fb7e[m
+Author: kdnash82 <63017230+kdnash82@users.noreply.github.com>
+Date:   Mon Aug 28 07:52:59 2023 -0700
+
+    Create kapp-controller-config.yaml
+
+[33mcommit 4d647975a903999d407302960af54c4819e4bc43[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Thu Jan 26 22:00:51 2023 +0000
+
+    tap/kustomization.yaml
+
+[33mcommit f57d651498a2da6a75445724f00e398544eec593[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Thu Jan 26 19:03:45 2023 +0000
+
+    removed sops
+
+[33mcommit 7fdd7382ca2d518e5f3426ff380a821e42cb6aa3[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Thu Jan 26 18:58:37 2023 +0000
+
+    need to get tls secret - revert back
+
+[33mcommit c8e5df9eeb9b403c8da6c640d0fb66d9f0913d6f[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Thu Dec 15 18:23:56 2022 +0000
+
+    removed contour-sa
+
+[33mcommit 3a68e2d2afc40dbf9100351bdf9a67cbb75e578f[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Thu Dec 15 18:20:56 2022 +0000
+
+    renamed directory
+
+[33mcommit 29e7a12fb2d34013e9e7f871e88d6a597933568d[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Tue Nov 22 16:06:40 2022 +0000
+
+    separating sa from main directoriesbecause packages cannot be removed through flux when sa and packageinstall are in the same directory
+
+[33mcommit 2f35bd05abb3890721f3aceedb67af3d8cf2d726[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 20:45:58 2022 +0000
+
+    testing sa without annotations
+
+[33mcommit 4b3d210e5eeb21260cce6efd066ca7329fca5a94[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 20:38:38 2022 +0000
+
+    remove sa yaml
+
+[33mcommit cfa4a997a603a7ff497f7f222fa30d7f45b9bc1a[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 20:35:22 2022 +0000
+
+    adding annotations
+
+[33mcommit ba99b2166677d935e9add1f5ab00b6efdf0e90b8[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 20:35:05 2022 +0000
+
+    removing annotations
+
+[33mcommit 1e91473185c7b1539672e9238b7f94cd5459ff92[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 20:13:33 2022 +0000
+
+    removed annotations
+
+[33mcommit 8348c3052dd03795ceec9e9527b9f1dcc47b1963[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 19:38:32 2022 +0000
+
+    removed kustomiztion file
+
+[33mcommit 705ff22a125cb0fe48efe2a79de7f276b427c9d4[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 19:37:49 2022 +0000
+
+    adding contour-sa
+
+[33mcommit 618296e2b166f1d0eeffd3d6f3490c50a94ad46f[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 19:06:44 2022 +0000
+
+    updated namespace for contour
+
+[33mcommit edbc721290ca033b2926fa0638b8218f935871d9[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Mon Nov 21 19:04:51 2022 +0000
+
+    added kustomization for contour
+
+[33mcommit 7ef554983fcdaf97d09b1ba8833c6179e6d5ce18[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Tue Nov 15 19:45:58 2022 +0000
+
+    remove finalizers
+
+[33mcommit e46e5e31bd8ef8823e7a6905b580cb542615ca13[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Tue Nov 15 19:03:11 2022 +0000
+
+    kapp finalizer added
+
+[33mcommit 45f6ee2678b849e1c48a229845cfae6ba5f5591d[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Tue Nov 15 18:41:36 2022 +0000
+
+    removed finalizers
+
+[33mcommit a0f424de70d340c229d4ed11cf66edf776b3dbb5[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Tue Nov 15 18:31:20 2022 +0000
+
+    removed finalizer from clusterrole
+
+[33mcommit 1a9b0e0ab6b79b1dfeae30325d66bbfb7188e747[m
+Author: Kevin Nash <knash@vmware.com>
+Date:   Tue Nov 15 18:28:48 2022 +0000
+
+    removed finalizer from clusterrolebinding

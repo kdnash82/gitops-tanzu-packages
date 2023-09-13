@@ -1,0 +1,10 @@
+apiVersion: sql.tanzu.vmware.com/v1
+kind: Postgres
+metadata:
+  name: pg-mypostgres
+  namespace: dotnet-ns
+spec:
+  storageClassName: default
+  storageSize: 10G
+  highAvailability:
+    enabled: false

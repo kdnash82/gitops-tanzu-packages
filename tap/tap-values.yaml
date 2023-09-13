@@ -4,7 +4,7 @@ profile: full
 # Used to exclude packages already installed.
 # Remove if there are no packages that need to be excluded
 shared:
-    ingress_domain: tap.avmc.army.mil 
+    ingress_domain: tap.<FQDN>
     ca_cert_data: |-
         -----BEGIN CERTIFICATE-----
         MIIEjzCCA3egAwIBAgICAwMwDQYJKoZIhvcNAQELBQAwWzELMAkGA1UEBhMCVVMx
@@ -187,9 +187,9 @@ shared:
 # Installation fails if this is not set to true. Not a string.
 ceip_policy_disclosed: true
 buildservice:
-    kp_default_repository: cs-s-harbor.avmc.army.mil/tbs/1.10.11
-    kp_default_repository_username: tap-admin 
-    kp_default_repository_password: MagicCloud2023!!@@ 
+    kp_default_repository: <HARBOR>.<FQDN>/tbs/1.10.11
+    kp_default_repository_username: <REGISTRY_USERNAME>
+    kp_default_repository_password: <REGISTRY_PASSWORD>
     exclude_dependencies: true
 # More information for supply chain
 # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.2/tap/GUID-getting-started-about-supply-chains.html
@@ -197,7 +197,7 @@ supply_chain: testing_scanning
 ootb_supply_chain_basic:
     service_account: default
     registry:
-        server: cs-s-harbor.avmc.army.mil 
+        server: <HARBOR>.<FQDN>
         repository: tap-supply-chain-basic 
     gitops:
         ssh_secret: github-ssh-secret
@@ -205,14 +205,14 @@ ootb_supply_chain_basic:
 
 ootb_supply_chain_testing_scanning:
     registry:
-        server: cs-s-harbor.avmc.army.mil 
+        server: <HARBOR>.<FQDN>
         repository: tap-supply-chain-testing 
     cluster_builder: default #tried full and saw many more critical vulns.  Trying to cut over to tiny.  Tiny seems to not include all of the buildpacks?
     service_account: default
 tap_gui:
     tls:
       namespace: tap-gui
-      secretName: tap-gui-cert-army
+      secretName: tap-gui-cert
     service_type: ClusterIP
     ingressEnabled: "true"
     #metadataStoreAutoconfiguration: true
@@ -220,13 +220,13 @@ tap_gui:
         auth:
             environment: development
             session:
-                secret: b8wxRZQTVSb8dTHm0q4aB3UNzrI2akSyLFuNDGhCD
+                secret: <AUTH_SECRET>
             providers:
                 oidc:
                     development:
-                        metadataUrl: https://cs-s-vidm-01.ds.amrdec.army.mil/SAAS/auth/.well-known/openid-configuration
-                        clientId: tap-gui
-                        clientSecret: 1oVHtFxIUbcfDHqKDn3iWfWybxFMBHXqBF8gW9ihFE
+                        metadataUrl: https://<OIDC_PROVIDER>/SAAS/auth/.well-known/openid-configuration
+                        clientId: <AUTH_ID>
+                        clientSecret: <AUTH_SECRET>
                         #tokenSignedResponseAlg: AUTH-OIDC-TOKEN-SIGNED-RESPONSE-ALG # default='RS256'
                         scope: 'group openid email profile user'
                         prompt: auto # default=none (allowed values: auto, none, consent, login)
@@ -236,21 +236,21 @@ tap_gui:
             changeOrigin: true
             secure: false
             headers:
-                Authorization: "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjA1RExneXVqN0xYTWZnOF9KQm01UXJTWkFxUTJlTFNfYVVmX3A0b0dXOTQifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtZXRhZGF0YS1zdG9yZSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJtZXRhZGF0YS1zdG9yZS1yZWFkLXdyaXRlLWNsaWVudCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJtZXRhZGF0YS1zdG9yZS1yZWFkLXdyaXRlLWNsaWVudCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImFmZDI3ZTM5LTZiMTEtNDNhNi1iOTQ5LThmZmE0NGMxMDJhOSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDptZXRhZGF0YS1zdG9yZTptZXRhZGF0YS1zdG9yZS1yZWFkLXdyaXRlLWNsaWVudCJ9.dOpo4R7CNtebGeRbzYGmZmNhN5Bp1qjtQNTixFNoQMpwsprDBPWfaphQvwJVpEykhckOHOOI1NGXC-gFw7dhddhXduSLOFLrHaE8iZWqohigid1qv7mjlhbnXn4qz73WSexevDiHM0a3Tp_LRLxiIylGINvsNrSpJYeJirFBYCLC5OzF6mz5Z0tg63iBj0227FAJAkQUeXmk17hCvWwa9FCx67ZN6tCHhLBsS4e8YtNe4kEVtOjRy32j_ztPC1zm0AihoQZtJnAV_NdWeRXmaZO9e8nmA1EjfuJtXayY9XxSsWcIVTbxwWqSIH_7Yi0qVv1RsBHamAoKNxYOY0xq7A"
+                Authorization: "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtZXRhZGF0YS1zdG9yZSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJtZXRhZGF0YS1zdG9yZS1yZWFkLXdyaXRlLWNsaWVudCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJtZXRhZGF0YS1zdG9yZS1yZWFkLXdyaXRlLWNsaWVudCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImFmZDI3ZTM5LTZiMTEtNDNhNi1iOTQ5LThmZmE0NGMxMDJhOSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDptZXRhZGF0YS1zdG9yZTptZXRhZGF0YS1zdG9yZS1yZWFkLXdyaXRlLWNsaWVudCJ9.dOpo4R7CNtebGeRbzYGmZmNhN5Bp1qjtQNTixFNoQMpwsprDBPWfaphQvwJVpEykhckOHOOI1NGXC-gFw7dhddhXduSLOFLrHaE8iZWqohigid1qv7mjlhbnXn4qz73WSexevDiHM0a3Tp_LRLxiIylGINvsNrSpJYeJirFBYCLC5OzF6mz5Z0tg63iBj0227FAJAkQUeXmk17hCvWwa9FCx67ZN6tCHhLBsS4e8YtNe4kEVtOjRy32j_ztPC1zm0AihoQZtJnAV_NdWeRXmaZO9e8nmA1EjfuJtXayY9XxSsWcIVTbxwWqSIH_7Yi0qVv1RsBHamAoKNxYOY0xq7A"
                 X-Custom-Source: project-star
         app:
-            baseUrl: https://tap-gui.tap.avmc.army.mil
+            baseUrl: https://tap-gui.tap.<FQDN>
         catalog:
             locations:
                 - type: url
-                  target: https://gitlab.k8s.avmc.army.mil/nashkd/tap-catalog/blob/main/catalog-info.yaml 
+                  target: https://gitlab.<FQDN>/nashkd/tap-catalog/blob/main/catalog-info.yaml 
         backend:
             reading:
                 allow:
-                   - host: gitlab.k8s.avmc.army.mil 
-            baseUrl: https://tap-gui.tap.avmc.army.mil
+                   - host: gitlab.<FQDN>
+            baseUrl: https://tap-gui.tap.<FQDN>
             cors:
-                origin: https://tap-gui.tap.avmc.army.mil
+                origin: https://tap-gui.tap.<FQDN>
 metadata_store:
     ns_for_export_app_cert: "*"
     app_service_type: ClusterIP
@@ -268,7 +268,7 @@ contour:
             type: LoadBalancer
 cnrs:
   domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
-  default_tls_secret: "dotnet-ns/tap-gui-cert-army" #how can we use the tap-install namespace? or maybe a a global read-only namespace?
+  default_tls_secret: "<namespace>/tap-gui-cert" #how can we use the tap-install namespace? or maybe a a global read-only namespace?
   ingress_issuer: ""
 accelerator:
     git_credentials:
